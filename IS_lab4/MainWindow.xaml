@@ -1,0 +1,60 @@
+﻿<Window x:Class="IS_lab4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_lab4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <!-- Создаем таблицу для размещения элементов -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <!-- Создаем кнопку для загрузки данных с сервера -->
+        <ToggleButton Content="Загрузить" IsChecked="{Binding LoadCommand}" Grid.Row="0" Grid.Column="0" Margin="10"/>
+        <!-- Создаем таблицу для отображения данных из базы данных -->
+        <DataGrid ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedFlower}" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Margin="10">
+            <DataGrid.Columns>
+                <!-- Создаем столбцы для каждого свойства цветка -->
+                <DataGridTextColumn Header="Идентификатор" Binding="{Binding Id}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Fname}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Lname}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Академический статус" Binding="{Binding Status}" IsReadOnly="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- Создаем панель для ввода данных нового цветка -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,10,10,86">
+            <!-- Создаем поля для каждого свойства цветка -->
+            <Label Content="Идентификатор:"/>
+            <TextBox Text="{Binding NewId}" />
+            <Label Content="Имя:"/>
+            <TextBox Text="{Binding NewFname}"/>
+            <Label Content="Фамилия:"/>
+            <TextBox Text="{Binding NewLname}"/>
+            <Label Content="Возраст:"/>
+            <TextBox Text="{Binding NewAge}"/>
+            <Label Content="Академический статус:"/>
+            <CheckBox IsChecked="{Binding NewStatus}"/>
+            <!-- Создаем кнопку для добавления нового цветка -->
+            <ToggleButton Content="Добавить" IsChecked="{Binding AddCommand}" Margin="0,10,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,260,10,20">
+            <Label Content="Удалить по номеру:"/>
+            <TextBox Text="{Binding DeleteId}"/>
+        </StackPanel>
+        <!-- Создаем кнопку для удаления выбранного студента по номеру-->
+        <ToggleButton Content="Удалить" IsChecked="{Binding DeleteIdCommand}" Grid.Row="1" Grid.Column="1" Margin="10,310,10,10"/>
+        <!-- Создаем кнопку для удаления выбранного студентв -->
+        <!--<ToggleButton Content="Удалить" IsChecked="{Binding DeleteCommand}" Grid.Row="2" Grid.Column="0" Margin="10"/>-->
+        <!-- Создаем кнопку для сохранения данных на сервер -->
+        <ToggleButton Content="Сохранить" IsChecked="{Binding SaveCommand}" Grid.Row="2" Grid.Column="1" Margin="10"/>
+    </Grid>
+</Window>
